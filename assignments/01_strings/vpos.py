@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Author : Me <me@foo.com>
-Date   : today
-Purpose: Rock the Casbah
+Author : Emma Huffman <emmahuffman@email.arizona.edu>
+Date   : 02/05/2020
+Purpose: Determine the position of a vowel in text
 """
 
 import argparse
@@ -20,7 +20,9 @@ def get_args():
 
     parser.add_argument('vowel',
                         metavar='vowel',
-                        help='A vowel to look for')
+                        help='A vowel to look for',
+                        choices = 'aeiouAEIOU')
+
     parser.add_argument('text',
                         metavar='text',
                         help='The text to search')
@@ -36,34 +38,14 @@ def main():
     vowel = args.vowel
     text = args.text
 
+    if vowel in text:
+        index = text.index(vowel)
+        print(f'Found "{vowel}" in "{text}" at index {index}.')
+    else:
+        print(f'"{vowel}" is not found in "{text}".')
 
-    print('vowel_arg = "{}"'.format(vowel_arg))
-    print('text_arg = "{}"'.format(text_arg))
-    print('int_arg = "{}"'.format(int_arg))
-    print('file_arg = "{}"'.format(file_arg.name))
-    print('flag_arg = "{}"'.format(flag_arg))
-    print('positional = "{}"'.format(pos_arg))
-
-    y = input("Enter a word:  ")
-    for i in range(len(y)):
-        if (y[i] == "a"):
-            x=i+1
-            print("Found",y[i], "at position", x)
-        if (y[i] == "e"):
-            x=i+1
-            print("Found",y[i], "at position", x)
-        if (y[i] == "i"):
-            x=i+1
-            print("Found",y[i], "at position", x)
-        if (y[i] == "o"):
-            x=i+1
-            print("Found",y[i], "at position", x)
-        if (y[i] == "u"):
-            x=i+1
-            print("Found",y[i], "at position", x)
 
 
 # --------------------------------------------------
 if __name__ == '__main__':
-
     main()
