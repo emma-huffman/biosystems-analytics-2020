@@ -28,7 +28,7 @@ def get_args():
                         help='A separator',
                         metavar='str',
                         type=str,
-                        default='')
+                        default=', ')
 
     return parser.parse_args()
 
@@ -47,12 +47,12 @@ def main():
         print(f'{item[0]}')
         print('This is one of my favorite things.')
     elif num == 2:
-        favorite = ',' .join(item)
+        favorite = args.sep .join(item)
         print(f'{item[0]}, {item[1]}')
         print('These are a few of my favorite things.')
     else:
         item[-1] = 'and ' + item[-1]
-        favorite = ', ' .join(item)
+        favorite = args.sep .join(item)
         print(f'{item[0]}, {item[1]}, {item[-1]}')
         print('These are a few of my favorite things.')
 
