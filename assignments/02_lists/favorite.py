@@ -48,12 +48,7 @@ def main():
         print('This is one of my favorite things.')
     elif num == 2:
         favorite = args.sep .join(item)
-        print(f'{item[0]}, {item[1]}')
-        print('These are a few of my favorite things.')
-    else:
-        item[-1] = 'and ' + item[-1]
-        favorite = args.sep .join(item)
-        print(f'{item[0]}, {item[1]}, {item[-1]}')
+        print(favorite)
         print('These are a few of my favorite things.')
 
 # --------------------------------------------------
