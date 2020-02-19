@@ -22,9 +22,7 @@ def get_args():
                         metavar='str',
                         nargs='+',
                         type=str,
-                        choices='Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday',
                         help='Days of the week')
-
 
     return parser.parse_args()
 
@@ -44,11 +42,13 @@ def main():
            'Saturday': "Oh, it's much too late on a Saturday",
             'Sunday': 'And Sunday is the day of rest'}
 
-    try:
-        for char in args.day:
-            print(feeling.get(char, char))
-    except (KeyError):
-        print("Can't find", char)
+    for day in args.day:
+        print(feeling.get(day, "Can\'t find \"{foo}\"".format(foo=day)))
+
+
+
+
+
 
 
 
