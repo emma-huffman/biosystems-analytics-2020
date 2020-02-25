@@ -6,7 +6,6 @@ Purpose: Emulate wc (Word Count)
 """
 
 import argparse
-import os
 import sys
 
 
@@ -34,21 +33,22 @@ def main():
 
     args = get_args()
 
-    total_lines, total_chars, total_words = 0, 0, 0
-
+    total_lines, total_words, total_chars = 0, 0, 0
     for fh in args.file:
-        num_lines, num_chars, num_words = 0, 0, 0
+        num_lines, num_words, num_chars = 0, 0, 0
         for line in fh:
             num_lines += 1
             num_chars += len(line)
             num_words += len(line.split())
+
         total_lines += num_lines
         total_chars += num_chars
         total_words += num_words
-    print(f'{num_lines:8}{num_chars:8}{num_words:8} {fh.name}')
 
-    if args.file > 1:
-        print(f'{total_lines:8}{total_chars:8}{total_words:8} Total')
+        print(f'{num_lines:8}{num_words:8}{num_chars:8} {fh.name}')
+
+    if len(args.file) > 1:
+        print(f'{total_lines:8}{total_words:8}{total_chars:8} total')
 
 
 # --------------------------------------------------
