@@ -8,7 +8,6 @@ Purpose: Rock the Casbah
 import argparse
 import os
 import sys
-import io
 
 
 # --------------------------------------------------
@@ -28,26 +27,24 @@ def get_args():
 
     parser.add_argument('file',
                         help='Input File',
-                        metavar='FILE',
-                        type=argparse.FileType('r'),
-                        default=[sys.stdin])
+                        nargs='?',
+                        type=argparse.FileType('r'))
 
-    return parser.parse_args()
+    args = parser.parse_args()
+    if not args.num > 0:
+        parser.error(f'--num "{args.num}" must be greater than 0')
 
+    return args
 
 # --------------------------------------------------
 def main():
     """Make a jazz noise here"""
 
     args = get_args()
-    fh = open(args.file, 'rt') if args.file else sys.stdout
-    num_lines = args.num
-    if num_lines != 0:
-        for fh in args.file:
-            len(args.file.splitlines())
-    else:
-        print(sys.stderr)
-
+    with open(args.file) as file:
+        for x in range(args.num):
+            head = file.read()
+        print(head)
 # --------------------------------------------------
 if __name__ == '__main__':
     main()
