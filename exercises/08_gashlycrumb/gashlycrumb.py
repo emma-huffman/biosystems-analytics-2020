@@ -21,7 +21,6 @@ def get_args():
     parser.add_argument('letter',
                         metavar='str',
                         help='Letter(s)',
-                        nargs='+',
                         type=str)
 
     parser.add_argument('-f',
@@ -40,12 +39,20 @@ def main():
 
     args = get_args()
     letter = args.letter
-    lookup = {line[0].upper(): line.rstrip() for line in args.file}
-    for letter in args.letter:
-        if letter.upper() in lookup:
-            print(lookup[letter.upper()])
-        else:
-            print(f'I do not know "{letter}".')
+    for line in args.file:
+        if line[0].upper() == letter.upper():
+            print(line, end='')
+            sys.exit(0)
+
+    print(f'I do not know "{letter}".')
+
+    # letter = args.letter
+    # lookup = {line[0].upper(): line.rstrip() for line in args.file}
+    # for letter in args.letter:
+    #     if letter.upper() in lookup:
+    #         print(lookup[letter.upper()])
+    #     else:
+    #         print(f'I do not know "{letter}".')
 
 # --------------------------------------------------
 if __name__ == '__main__':
