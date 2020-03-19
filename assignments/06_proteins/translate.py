@@ -8,6 +8,7 @@ Purpose: Translate DNA/RNA to proteins
 import argparse
 import os
 import sys
+import pprint
 
 
 # --------------------------------------------------
@@ -28,15 +29,14 @@ def get_args():
                         help='A file with codon translations',
                         metavar='FILE',
                         type=argparse.FileType('r'),
-                        default=None)
+                        required=True)
 
     parser.add_argument('-o',
                         '--outfile',
                         help='Output filename',
                         metavar='FILE',
-                        type=argparse.FileType('r'),
+                        type=argparse.FileType('w'),
                         default='out.txt')
-
 
     return parser.parse_args()
 
@@ -44,11 +44,27 @@ def get_args():
 # --------------------------------------------------
 def main():
     """Make a jazz noise here"""
-
     args = get_args()
+    str = args.str.upper()
+    codons = {}
 
+    for line in args.codons:
+        codon, protein = line.upper().split()
+        codons[codon] = protein
 
+    k = 3
+    proteins = []
+    for codon in [str[i:i + k] for i in range(0, len(str) - k + 1, k)]:
+        proteins.append(codons.get(codon, '-'))
 
+    print(''.join(proteins), file=args.outfile)
+
+    print(f'Output written to "{args.outfile.name}".')
+    # print(''.join(proteins), file=open(args.outfile, 'wt'))
+    #
+    # out_fh = open(args.outfile, 'wt')
+    # out_fh.write(''.join(proteins))
+    # out_fh.close()
 # --------------------------------------------------
 if __name__ == '__main__':
     main()
