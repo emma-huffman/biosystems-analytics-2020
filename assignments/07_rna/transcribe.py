@@ -47,9 +47,13 @@ def main():
     trans = str.maketrans('T','U')
     dna = dna.translate(trans)
 
-    # for fh in args.file:
-    #     for line in fh:
-    #         if
+    for fh in args.file:
+        out_file = os.path.join(out_dir, os.path.basename(fh.name))
+        out_fh = open(out_file, 'wt')
+        for line in fh:
+            out_dir.write(dna)
+    print(f'Done, wrote 1 sequence in 1 file to directory "out".')
+
     # for char in dna:
     #     rna = dna.replace('T', 'U')
     # print(rna)
