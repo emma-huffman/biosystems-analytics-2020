@@ -38,22 +38,24 @@ def main():
 
     args = get_args()
     out_dir = args.outdir
-    dna = args.FILE
     # rna = ''
 
     if not os.path.isdir(out_dir):
         os.makedirs(out_dir)
 
     trans = str.maketrans('T','U')
-    dna = dna.translate(trans)
 
-    for fh in args.file:
+    for fh in args.FILE:
         out_file = os.path.join(out_dir, os.path.basename(fh.name))
         out_fh = open(out_file, 'wt')
-        for line in fh:
-            out_dir.write(dna)
-    print(f'Done, wrote 1 sequence in 1 file to directory "out".')
+        for dna in fh:
+            rna = dna.translate(trans)
+            out_fh.write(rna + '\n')
+        out_fh.close()
+        print(f'Done, wrote 1 sequence in 1 file to directory "out".')
 
+    if len(args.FILE) > 1:
+        print(f'Done, wrote {len()} sequences in {len(args.FILE)} files to directory "out".')
     # for char in dna:
     #     rna = dna.replace('T', 'U')
     # print(rna)
