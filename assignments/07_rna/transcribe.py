@@ -18,7 +18,7 @@ def get_args():
         description='Transcribing DNA to RNA',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-    parser.add_argument('FILE',
+    parser.add_argument('file',
                         metavar='str',
                         type=argparse.FileType('r'),
                         nargs='+',
@@ -26,6 +26,7 @@ def get_args():
 
     parser.add_argument('-o',
                         '--outdir',
+                        metavar='DIR',
                         help='Output directory',
                         default='out')
 
@@ -38,42 +39,29 @@ def main():
 
     args = get_args()
     out_dir = args.outdir
-    # rna = ''
 
     if not os.path.isdir(out_dir):
         os.makedirs(out_dir)
 
-    trans = str.maketrans('T','U')
+    trans = str.maketrans('T', 'U')
 
-    for fh in args.FILE:
+    num_files, num_seqs = 0, 0
+    for fh in args.file:
+        num_files += 1
         out_file = os.path.join(out_dir, os.path.basename(fh.name))
         out_fh = open(out_file, 'wt')
+
         for dna in fh:
+            num_seqs += 1
             rna = dna.translate(trans)
             out_fh.write(rna + '\n')
-        out_fh.close()
-        print(f'Done, wrote 1 sequence in 1 file to directory "out".')
 
-    if len(args.FILE) > 1:
-        print(f'Done, wrote {len()} sequences in {len(args.FILE)} files to directory "out".')
-    # for char in dna:
-    #     rna = dna.replace('T', 'U')
-    # print(rna)
-    # for fh in args.file:
-    #     out_file = os.path.join(out_dir, os.path.basename(fh.name))
-    #     out_fh = open(out_file, 'wt')
-    #     for line in fh:
-    #         if i == 'T':
-    #             rna += 'U'
-    #         else:
-    #             rna += i
-#need to define i in some way so that I can iterate through lines.
-#not sure how to set that parameter
-        # for i in fh:
-        #     if i == 'T':
-        #         rna += 'U'
-        #     else:
-        #         rna += i
+        out_fh.close()
+
+        print(f'Done, wrote {num_seqs} sequence{"" if num_seqs == 1 else "s"} '
+              f'in {num_files} file{"" if num_files == 1 else "s"} '
+              f'to directory "{out_dir}".')
+
 
 # two for loops
 # need to iterate through line and through file
