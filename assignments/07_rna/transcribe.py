@@ -43,7 +43,7 @@ def main():
     if not os.path.isdir(out_dir):
         os.makedirs(out_dir)
 
-    trans = str.maketrans('T', 'U')
+    trans = str.maketrans('T','U')
 
     num_files, num_seqs = 0, 0
     for fh in args.file:
@@ -54,13 +54,13 @@ def main():
         for dna in fh:
             num_seqs += 1
             rna = dna.translate(trans)
-            out_fh.write(rna + '\n')
+            out_fh.write(rna)
 
         out_fh.close()
 
-        print(f'Done, wrote {num_seqs} sequence{"" if num_seqs == 1 else "s"} '
-              f'in {num_files} file{"" if num_files == 1 else "s"} '
-              f'to directory "{out_dir}".')
+    print(f'Done, wrote {num_seqs} sequence{"" if num_seqs == 1 else "s"} '
+        f'in {num_files} file{"" if num_files == 1 else "s"} '
+        f'to directory "{out_dir}".')
 
 
 # two for loops
