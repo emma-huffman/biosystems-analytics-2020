@@ -9,6 +9,7 @@ import argparse
 import os
 import sys
 
+
 # --------------------------------------------------
 
 
@@ -39,7 +40,6 @@ def main():
               '8': '2',
               '9': '1',
               '0': '5'}
-
 
     print(args.text.translate(str.maketrans(jumper)))
 

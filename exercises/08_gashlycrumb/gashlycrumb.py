@@ -19,7 +19,7 @@ def get_args():
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     parser.add_argument('letter',
-                        metavar='str',
+                        metavar='letter',
                         help='Letter(s)',
                         nargs='+',
                         type=str)
@@ -27,7 +27,7 @@ def get_args():
     parser.add_argument('-f',
                         '--file',
                         help='Input file',
-                        metavar='str',
+                        metavar='FILE',
                         type=argparse.FileType('r'),
                         default='gashlycrumb.txt')
 
@@ -39,6 +39,7 @@ def main():
     """Make a jazz noise here"""
 
     args = get_args()
+    letter = args.letter
     lookup = {line[0].upper(): line.rstrip() for line in args.file}
     for letter in args.letter:
         if letter.upper() in lookup:

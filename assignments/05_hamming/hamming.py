@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Author : Me <me@foo.com>
-Date   : today
-Purpose: Rock the Casbah
+Author : Emma Huffman <emmahuffman@email.arizona.edu>
+Date   : 03/02/2020
+Purpose: Define differences in given text
 """
 
 import argparse
@@ -15,7 +15,7 @@ def get_args():
     """Get command-line arguments"""
 
     parser = argparse.ArgumentParser(
-        description='Rock the Casbah',
+        description='Define differences in given text',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     parser.add_argument('file',
@@ -25,7 +25,7 @@ def get_args():
 
     parser.add_argument('-m',
                         '--min',
-                        help='Minimum integer value',
+                        help='Minimum distance to show',
                         metavar='int',
                         type=int,
                         default=0)
@@ -48,6 +48,23 @@ def main():
                 change += 1
         if change >= args.min:
             print(f'{change:8}:{word1:20}{word2:20}')
+
+    # for line in args.file:
+    #     word1, word2 = line.rstrip().split()
+    #
+    #     l1, l2 = len(word1), len(word2)
+    #     distance = abs(l1 - l2)
+    #
+    #     for i in range(min(l1, l2)):
+    #         if word1[i] != word2[i]:
+    #             distance += 1
+    #
+    # if distance >= args.min:
+    #     print(f'{distance:8}:{word1:20}{word2:20}')
+
+    
+
+
 
 
 

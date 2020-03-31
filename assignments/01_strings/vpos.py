@@ -21,7 +21,7 @@ def get_args():
     parser.add_argument('vowel',
                         metavar='vowel',
                         help='A vowel to look for',
-                        choices = 'aeiouAEIOU')
+                        choices='aeiouAEIOU')
 
     parser.add_argument('text',
                         metavar='text',
@@ -43,7 +43,6 @@ def main():
         print(f'Found "{vowel}" in "{text}" at index {index}.')
     else:
         print(f'"{vowel}" is not found in "{text}".')
-
 
 
 # --------------------------------------------------

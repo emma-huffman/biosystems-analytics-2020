@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Author : Ken Youens-Clark <kyclark@gmail.com>
-Date   : 24 October 2018
-Purpose: Python program to write a Python program
+Author : Emma Huffman <emmahuffman@email.arizona.edu>
+Date   : 29 January 2020
+Purpose: Python program to find position of a vowel within a word
 """
 
 import argparse
@@ -89,6 +89,11 @@ def main():
     subprocess.run(['chmod', '+x', program])
     print('Done, see new script "{}."'.format(program))
 
+    vowel = 'a,e,i,o,u'
+    if vowel in text:
+        print(f("Found", vowel, "in text at index"))
+        else print(vowel, "Not found in", text)
+
 
 # --------------------------------------------------
 def preamble(**args):
@@ -145,36 +150,14 @@ def get_args():
         description='{}',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-    parser.add_argument('positional',
+    parser.add_argument('vowel',
                         metavar='str',
-                        help='A positional argument')
-
-    parser.add_argument('-a',
-                        '--arg',
-                        help='A named string argument',
+                        help='Position of a vowel')
+    parser.add_argument('text',
                         metavar='str',
-                        type=str,
-                        default='')
+                        help='Position of text')
 
-    parser.add_argument('-i',
-                        '--int',
-                        help='A named integer argument',
-                        metavar='int',
-                        type=int,
-                        default=0)
-
-    parser.add_argument('-f',
-                        '--file',
-                        help='A readable file',
-                        metavar='FILE',
-                        type=argparse.FileType('r'),
-                        default=None)
-
-    parser.add_argument('-o',
-                        '--on',
-                        help='A boolean flag',
-                        action='store_true')
-
+    
     return parser.parse_args()
 
 
@@ -188,6 +171,8 @@ def main():
     file_arg = args.file
     flag_arg = args.on
     pos_arg = args.positional
+    vowel = args.vowel
+    text = args.text
 
     print('str_arg = "{{}}"'.format(str_arg))
     print('int_arg = "{{}}"'.format(int_arg))
@@ -201,6 +186,7 @@ if __name__ == '__main__':
     main()
 """
     return text.format(purpose)
+
 
 # --------------------------------------------------
 def get_defaults():

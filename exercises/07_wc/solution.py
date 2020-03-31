@@ -38,8 +38,8 @@ def main():
             words += len(line.split())
 
         total_lines += lines
-        total_chars += chars
         total_words += words
+        total_chars += chars
 
         print(f'{lines:8}{words:8}{chars:8} {fh.name}')
 

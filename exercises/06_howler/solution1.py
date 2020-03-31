@@ -6,6 +6,7 @@ import os
 import sys
 
 
+
 # --------------------------------------------------
 def get_args():
     """get command-line arguments"""
@@ -27,6 +28,7 @@ def get_args():
 
     if os.path.isfile(args.text):
         args.text = open(args.text).read().rstrip()
+
 
     return args
 

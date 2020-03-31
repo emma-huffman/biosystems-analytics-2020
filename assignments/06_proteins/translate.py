@@ -19,7 +19,7 @@ def get_args():
         description='Translate DNA/RNA to proteins',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-    parser.add_argument('str',
+    parser.add_argument('seq',
                         metavar='str',
                         help='DNA/RNA sequence')
 
