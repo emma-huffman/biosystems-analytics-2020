@@ -61,15 +61,15 @@ def main():
 
 
     adjectives = "bankrupt base caterwauling corrupt cullionly detestable dishonest false" \
-                 "filthsome filthy foolish foul gross heedless indistinguishable infected" \
-                 "insatiate irksome lascivious lecherous loathsome lubbery old peevish" \
-                 "rascaly rotten ruinous scurilous scurvy slanderous sodden-witten thin-faced" \
-                 "toad-spotted unmannered vile wall-eyed".strip().split()
+                 " filthsome filthy foolish foul gross heedless indistinguishable infected" \
+                 " insatiate irksome lascivious lecherous loathsome lubbery old peevish" \
+                 " rascaly rotten ruinous scurilous scurvy slanderous sodden-witted thin-faced" \
+                 " toad-spotted unmannered vile wall-eyed".strip().split()
 
     nouns = "Judan Satan ape ass barbermonger beggar block boy braggart butt carbuncle" \
-            "coward coxcomb cur dandy degenerate fiend fishmonger fool gull harpy jack" \
-            "jolthead knave liar lunatic maw milksop minion ratcatcher recreant rogue scold " \
-            "slave swine traitor varlet villain worm".strip().split()
+            " coward coxcomb cur dandy degenerate fiend fishmonger fool gull harpy jack" \
+            " jolthead knave liar lunatic maw milksop minion ratcatcher recreant rogue scold" \
+            " slave swine traitor varlet villain worm".strip().split()
 
     for n in range(args.number):
         adj = ', '.join(random.sample(adjectives, k=args.adjectives))
