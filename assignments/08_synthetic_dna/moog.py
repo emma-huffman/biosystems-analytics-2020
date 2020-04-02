@@ -7,7 +7,7 @@ Purpose: Rock the Casbah
 
 import argparse
 import random
-import Bio
+import os
 
 # --------------------------------------------------
 def get_args():
@@ -29,7 +29,8 @@ def get_args():
                         help='DNA or RNA',
                         metavar='str',
                         type=str,
-                        default='dna')
+                        default='dna',
+                        choices=['dna', 'rna'])
 
     parser.add_argument('-n',
                         '--numseqs',
@@ -82,19 +83,25 @@ def main():
     random.seed(args.seed)
     pool = create_pool(args.pctgc, args.maxlen, args.seqtype)
 
-    for
-        seq_len =
-        seq =
-        args.outfile.write()
-    print()
+    if os.path.isfile(args.outfile):
+        os.remove(args.outfile)
+
+    for n in args.numseqs:
+        seq_len = random.randint(range(args.minlen, args.maxlen))
+        seq = str(random.sample(seq_len, pool))
+        args.outfile.write(seq + '.fasta')
+
+    print(f'Done, wrote {args.numseqs} DNA sequences to "{args.outfile}".')
+
 
 # --------------------------------------------------
 def create_pool(pctgc, max_len, seq_type):
     """ Create the Pool of Bases"""
     t_or_u = 'T' if seq_type == 'dna' else 'U'
-    num_at = int(((1-pctgc)/2)*max_len)
-    num_gc = int((pctgc/2)*max_len)
-    pool = 'A'*num_at + 'C'*num_gc + 'G'*num_gc + 't_or_u'*num_at
+    num_at = int(((1 - pctgc) / 2) * max_len)
+    num_gc = int((pctgc / 2) * max_len)
+    pool = 'A' * num_at + 'C' * num_gc + 'G' * num_gc + 't_or_u' * num_at
+
 
 # --------------------------------------------------
 if __name__ == '__main__':
