@@ -9,7 +9,7 @@ import argparse
 import os
 import sys
 import random
-# from Bio import io
+from Bio import SeqIO
 
 
 # --------------------------------------------------
@@ -21,7 +21,7 @@ def get_args():
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     parser.add_argument('file',
-                        metavar='str',
+                        metavar='FILE',
                         nargs='+',
                         type=argparse.FileType('r'),
                         help='Input FASTA file(s)')
@@ -61,11 +61,24 @@ def main():
     args = get_args()
     random.seed(args.seed)
     out_dir = args.outdir
-    num_seq = args.reads
-    num_files = args.file
 
     if not os.path.isdir(out_dir):
         os.makedirs(out_dir)
+
+    num_seqs = 0
+    for i, fh in enumerate(args.file, start=1):
+        basename = os.path.basename(fh.name)
+        out_file = os.path.join(out_dir, basename)
+        out_fh = open(out_file, 'wt')
+        print(f'{i:3}: {basename}')
+
+        for rec in SeqIO.parse(fh, 'fasta'):
+            if random.random() <= args.pct:
+                num_seqs += 1
+                SeqIO.write(rec, out_fh, 'fasta')
+
+        print(num_seqs)
+
 
     # for fh in args.file:
     #     out_file = os.path.join(out_dir, os.path.basename(fh.name))
@@ -84,27 +97,26 @@ def main():
     #       f'to directory "{out_dir}".'
     #       f'in {files} file{"" if files == 1 else "s"}')
 
-    args = get_args()
-    random.seed(args.seed)
 
-    for fh, line in enumerate(args.file, start=1):
-        basename = os.path.basename(fh.name)
-        out_file = os.path.join(args.outdir, basename)
-        print(line, end='')
-        if line == num_files:
-            break
 
-        out_fh = open(out_file, 'wt')
-        for rec in SeqIO.parse(fh, 'fasta'):
-            # if random.random(range(args.pct)):   ?
-                SeqIO.write(rec, out_fh, 'fasta')
-
-        out_fh.close()
-
-    print((f'Wrote {num_seq} sequence{"" if num_seq == 1 else "s"} '
-          f'in {num_files} file{"" if num_files == 1 else "s"}'
-          f'to directory "{out_dir}".'
-          f'in {num_files} file{"" if num_files == 1 else "s"}'))
+    # for fh, line in enumerate(args.file, start=1):
+    #     basename = os.path.basename(fh.name)
+    #     out_file = os.path.join(args.outdir, basename)
+    #     print(line, end='')
+    #     if line == num_files:
+    #         break
+    #
+    #     out_fh = open(out_file, 'wt')
+    #     for rec in SeqIO.parse(fh, 'fasta'):
+    #         # if random.random(range(args.pct)):   ?
+    #             SeqIO.write(rec, out_fh, 'fasta')
+    #
+    #     out_fh.close()
+    #
+    # print((f'Wrote {num_seq} sequence{"" if num_seq == 1 else "s"} '
+    #       f'in {num_files} file{"" if num_files == 1 else "s"}'
+    #       f'to directory "{out_dir}".'
+    #       f'in {num_files} file{"" if num_files == 1 else "s"}'))
 
 
 
