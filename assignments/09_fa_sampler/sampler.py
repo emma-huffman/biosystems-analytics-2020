@@ -77,8 +77,10 @@ def main():
                 num_seqs += 1
                 SeqIO.write(rec, out_fh, 'fasta')
 
-        print(num_seqs)
-
+    num_files = len(args.file)
+    print((f'Wrote {num_seqs:,} sequence{"" if num_seqs == 1 else "s"} '
+        f'from {num_files} file{"" if num_files == 1 else "s"}'
+        f' to directory "{out_dir}"'))
 
     # for fh in args.file:
     #     out_file = os.path.join(out_dir, os.path.basename(fh.name))
