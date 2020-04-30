@@ -65,8 +65,8 @@ def main():
 
         taxa = annots.get('taxonomy')
         if taxa:
-            taxa = set(map(str.lower(), taxa))
-            if skip_taxa.intersection((taxa)):
+            taxa = set(map(str.lower, taxa))
+            if skip_taxa.intersection(taxa):
                 num_skipped += 1
                 continue
 
